@@ -8,13 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		BF1BBB3A1E0E438700444D62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB391E0E438700444D62 /* AppDelegate.swift */; };
-		BF1BBB3C1E0E438700444D62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB3B1E0E438700444D62 /* ViewController.swift */; };
 		BF1BBB3F1E0E438700444D62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1BBB3D1E0E438700444D62 /* Main.storyboard */; };
 		BF1BBB421E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB401E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld */; };
 		BF1BBB441E0E438700444D62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF1BBB431E0E438700444D62 /* Assets.xcassets */; };
 		BF1BBB471E0E438700444D62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1BBB451E0E438700444D62 /* LaunchScreen.storyboard */; };
 		BF1BBB521E0E438800444D62 /* NTNU_Image_Talk_MobileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB511E0E438800444D62 /* NTNU_Image_Talk_MobileTests.swift */; };
 		BF1BBB5D1E0E438800444D62 /* NTNU_Image_Talk_MobileUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB5C1E0E438800444D62 /* NTNU_Image_Talk_MobileUITests.swift */; };
+		BF1BBB6B1E0E509800444D62 /* ImageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB6A1E0E509800444D62 /* ImageTableViewController.swift */; };
+		BF1BBB6D1E0E6C2200444D62 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB6C1E0E6C2200444D62 /* ImageTableViewCell.swift */; };
+		BF1BBB6F1E0E9E8A00444D62 /* imageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB6E1E0E9E8A00444D62 /* imageDetailViewController.swift */; };
+		BF1BBB711E0EA19600444D62 /* MyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB701E0EA19600444D62 /* MyImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +40,6 @@
 /* Begin PBXFileReference section */
 		BF1BBB361E0E438700444D62 /* NTNU Image Talk Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NTNU Image Talk Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1BBB391E0E438700444D62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BF1BBB3B1E0E438700444D62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BF1BBB3E1E0E438700444D62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BF1BBB411E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NTNU_Image_Talk_Mobile.xcdatamodel; sourceTree = "<group>"; };
 		BF1BBB431E0E438700444D62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +51,10 @@
 		BF1BBB581E0E438800444D62 /* NTNU Image Talk MobileUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NTNU Image Talk MobileUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1BBB5C1E0E438800444D62 /* NTNU_Image_Talk_MobileUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTNU_Image_Talk_MobileUITests.swift; sourceTree = "<group>"; };
 		BF1BBB5E1E0E438800444D62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BF1BBB6A1E0E509800444D62 /* ImageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewController.swift; sourceTree = "<group>"; };
+		BF1BBB6C1E0E6C2200444D62 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		BF1BBB6E1E0E9E8A00444D62 /* imageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageDetailViewController.swift; sourceTree = "<group>"; };
+		BF1BBB701E0EA19600444D62 /* MyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +106,15 @@
 			isa = PBXGroup;
 			children = (
 				BF1BBB391E0E438700444D62 /* AppDelegate.swift */,
-				BF1BBB3B1E0E438700444D62 /* ViewController.swift */,
 				BF1BBB3D1E0E438700444D62 /* Main.storyboard */,
 				BF1BBB431E0E438700444D62 /* Assets.xcassets */,
 				BF1BBB451E0E438700444D62 /* LaunchScreen.storyboard */,
 				BF1BBB481E0E438700444D62 /* Info.plist */,
 				BF1BBB401E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld */,
+				BF1BBB6A1E0E509800444D62 /* ImageTableViewController.swift */,
+				BF1BBB6C1E0E6C2200444D62 /* ImageTableViewCell.swift */,
+				BF1BBB6E1E0E9E8A00444D62 /* imageDetailViewController.swift */,
+				BF1BBB701E0EA19600444D62 /* MyImage.swift */,
 			);
 			path = "NTNU Image Talk Mobile";
 			sourceTree = "<group>";
@@ -265,8 +274,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF1BBB3C1E0E438700444D62 /* ViewController.swift in Sources */,
 				BF1BBB3A1E0E438700444D62 /* AppDelegate.swift in Sources */,
+				BF1BBB711E0EA19600444D62 /* MyImage.swift in Sources */,
+				BF1BBB6D1E0E6C2200444D62 /* ImageTableViewCell.swift in Sources */,
+				BF1BBB6F1E0E9E8A00444D62 /* imageDetailViewController.swift in Sources */,
+				BF1BBB6B1E0E509800444D62 /* ImageTableViewController.swift in Sources */,
 				BF1BBB421E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +528,7 @@
 				BF1BBB631E0E438800444D62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BF1BBB641E0E438800444D62 /* Build configuration list for PBXNativeTarget "NTNU Image Talk MobileTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +537,7 @@
 				BF1BBB661E0E438800444D62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BF1BBB671E0E438800444D62 /* Build configuration list for PBXNativeTarget "NTNU Image Talk MobileUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +546,7 @@
 				BF1BBB691E0E438800444D62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
