@@ -7,9 +7,18 @@
 //
 
 import UIKit
-var imageNames = ["Cafe Deadend","Homei"]
-class ImageTableViewController: UITableViewController {
 
+
+class ImageTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate{
+    @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
+    
+    }
+    var imageNames = ["Cafe Deadend","Homei","xox","oxo"]
+    //var searchController:UISearchController!
+    var filteredImageNames = [String]()
+    var resultSearchController = UISearchController()
+    //var mysearchBar = UISearchBar()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +31,42 @@ class ImageTableViewController: UITableViewController {
         // clean NavigationBar tint
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
         
+        
+        
+        
+        self.resultSearchController = UISearchController(searchResultsController: nil)
+        self.resultSearchController.searchResultsUpdater = self
+        
+        self.resultSearchController.dimsBackgroundDuringPresentation = false
+        self.resultSearchController.searchBar.sizeToFit()
+        self.resultSearchController.searchResultsUpdater = self
+        self.definesPresentationContext = true
+        self.tableView.tableHeaderView = self.resultSearchController.searchBar
+        self.tableView.reloadData()
+        //searchController = UISearchController(searchResultsController: nil)
+        //tableView.tableHeaderView = searchController.searchBar
+        //self.searchController.delegate = self;
+        
+        
+        //navigationItem.titleView = searchBar
+        //self.resultSearchController.searchBar = searchBar()
+        //resultSearchController.searchBar = self
+        //var searchBar = self.resultSearchController.searchBar
+        //mysearchBar.delegate = self
     }
-
+    
+    
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        print("xxx")
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        print("Press Search Button")
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        print("Press")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -44,7 +87,11 @@ class ImageTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return imageNames.count
+        if(self.resultSearchController.isActive){
+            return self.filteredImageNames.count
+        }else{
+            return imageNames.count
+        }
     }
 
     
@@ -56,14 +103,26 @@ class ImageTableViewController: UITableViewController {
         
         // Configure the cell...
         cell.thumbnailImageView.contentMode = UIViewContentMode.scaleAspectFill
-        cell.imageDescription.text = imageNames[indexPath.row]
-        cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
-        
-        
-        
+        if(self.resultSearchController.isActive){
+            cell.imageDescription.text = self.filteredImageNames[indexPath.row]
+            cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
+        }else{
+            cell.imageDescription.text = imageNames[indexPath.row]
+            cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
+        }
         return cell
     }
     
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        self.filteredImageNames.removeAll(keepingCapacity: false)
+        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
+        //let array = (self.imageNames as NSArray).filterArrayUsingPredicate(searchPredicate)
+        let array = imageNames.filter { searchPredicate.evaluate(with: $0) }
+        self.filteredImageNames = array 
+        self.tableView.reloadData()
+    }
     /*
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // build Action List
@@ -124,7 +183,15 @@ class ImageTableViewController: UITableViewController {
         if segue.identifier == "showImageDetail"{
             if let indexPath = tableView.indexPathForSelectedRow{
                 let destinationController = segue.destination as! imageDetailViewController
-                destinationController.imageImage = "Hamburger"
+                if(self.resultSearchController.isActive){
+                    destinationController.imageName = filteredImageNames[indexPath.row]
+                }else{
+                    destinationController.imageImage = "Hamburger"
+                    destinationController.imageName = imageNames[indexPath.row]
+                    
+                }
+                
+                
             }
         }
     }
@@ -158,3 +225,9 @@ class ImageTableViewController: UITableViewController {
     */
 
 }
+/*
+extension ImageTableViewController: UISearchBarDelegate{
+    func searchBar(searchBar: UISearchBar,searchBarSearchButtonClicked selectedScope: Int){
+        print("hello")
+    }
+}*/

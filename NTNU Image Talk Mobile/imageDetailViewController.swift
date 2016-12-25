@@ -9,16 +9,49 @@
 import UIKit
 
 class imageDetailViewController: UIViewController {
+    @IBOutlet weak var DescriptionArea: UILabel!
     @IBOutlet weak var imageImageView: UIImageView!
     var imageImage = ""
+    var imageName = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         title = "Result"
+        
+        imageImageView.layer.borderColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+        imageImageView.layer.cornerRadius = 5.0
+        imageImageView.layer.borderWidth = 4
+        //imageImageView.clipsToBounds = true
+        //imageImageView.layer.frame = imageImageView.layer.frame.insetBy(dx: 20, dy: 20)
+        //imageImageView.contentMode = UIViewContentMode.scaleAspectFit
+        
+        
+        
         imageImageView.image = UIImage(named: imageImage)
+        
+        let topColor = UIColor(red:15.0/255.0,green:118.0/255.0,blue:128.0/255.0,alpha:1.0)
+        let bottomColor = UIColor(red:84.0/255.0,green:187.0/255.0,blue:187.0/255.0,alpha:1.0)
+        let gradientColor:[CGColor] = [topColor.cgColor, bottomColor.cgColor]
+        let gradientLocations: [Float] = [0.0,1.0]
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColor
+        gradientLayer.locations = gradientLocations as [NSNumber]?
+        gradientLayer.frame = self.view.bounds
+        //gradientLayer.frame = self.DescriptionArea.layer.bounds
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+        //self.DescriptionArea.layer.insertSublayer(gradientLayer, at: 0)
+        
+        
+        DescriptionArea.text = imageName
+        
     }
+    
+    override func viewWillLayoutSubviews() {
+        DescriptionArea.sizeToFit()
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
