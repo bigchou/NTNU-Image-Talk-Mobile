@@ -24,10 +24,22 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     var shouldShowSearchResults = false
     
     
-    
-    var resultSearchController = UISearchController()
+    var searchController: UISearchController!
+    //var resultSearchController = UISearchController()
     //var mysearchBar = UISearchBar()
     
+    func configureSearchController() {
+         // Initialize and perform a minimum configuration to the search controller.
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = true //become darker when searching
+        searchController.searchBar.placeholder = "Search here..."
+        searchController.searchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        // Place the search bar view to the tableview headerview.
+        self.tableView.tableHeaderView = searchController.searchBar
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,10 +51,10 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         
         // clean NavigationBar tint
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
+        configureSearchController()
         
         
-        
-        
+        /*
         self.resultSearchController = UISearchController(searchResultsController: nil)
         self.resultSearchController.searchResultsUpdater = self
         
@@ -51,7 +63,9 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         self.resultSearchController.searchResultsUpdater = self
         self.definesPresentationContext = true
         self.tableView.tableHeaderView = self.resultSearchController.searchBar
+ 
         self.tableView.reloadData()
+        */
         //searchController = UISearchController(searchResultsController: nil)
         //tableView.tableHeaderView = searchController.searchBar
         //self.searchController.delegate = self;
@@ -65,7 +79,7 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     }
     
     
-    
+    /*
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("xxx")
     }
@@ -74,7 +88,36 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         print("Press")
+    }*/
+    
+    
+    
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = true
+        self.tableView.reloadData()
     }
+    
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        shouldShowSearchResults = false
+        self.tableView.reloadData()
+    }
+    
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if !shouldShowSearchResults {
+            shouldShowSearchResults = true
+            self.tableView.reloadData()
+        }
+        searchController.searchBar.resignFirstResponder() // close keyboard
+    }
+    
+    
+    
+    
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -149,7 +192,36 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     
     
     
+    
+    /*func updateSearchResultsForSearchController(searchController: UISearchController) {
+        guard let searchString = searchController.searchBar.text else {
+            return
+        }
+        
+        // Filter the data array and get only those countries that match the search text.
+        filteredmyimages = myimages.filter({ (country) -> Bool in
+            let countryText:NSString = country
+            
+            return (countryText.rangeOfString(searchString, options: NSStringCompareOptions.CaseInsensitiveSearch).location) != NSNotFound
+        })
+        
+        // Reload the tableview.
+        self.tableView.reloadData()
+    }*/
+    
+    
+    func filterContentForSearchText(searchText: String){
+        filteredmyimages = myimages.filter({ (myimage:MyImage) -> Bool in
+            let nameMatch = myimage.description.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            return nameMatch != nil
+        })
+    }
     func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text{
+            filterContentForSearchText(searchText: searchText)
+            tableView.reloadData()
+        }
+        /*
         self.filteredmyimages.removeAll(keepingCapacity: false)
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
         //let array = (self.imageNames as NSArray).filterArrayUsingPredicate(searchPredicate)
@@ -157,6 +229,7 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         //let array = imageNames.filter { searchPredicate.evaluate(with: $0) }
         self.filteredmyimages = array
         self.tableView.reloadData()
+        */
     }
  
  
@@ -221,10 +294,10 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         if segue.identifier == "showImageDetail"{
             if let indexPath = tableView.indexPathForSelectedRow{
                 let destinationController = segue.destination as! imageDetailViewController
-                if(self.resultSearchController.isActive){
+                if(shouldShowSearchResults){
                     //destinationController.imageName = filteredImageNames[indexPath.row]
-                    destinationController.imageImage = myimages[indexPath.row].image
-                    destinationController.imageName = myimages[indexPath.row].description
+                    destinationController.imageImage = filteredmyimages[indexPath.row].image
+                    destinationController.imageName = filteredmyimages[indexPath.row].description
                 }else{
                     //destinationController.imageImage = "Hamburger"
                     //destinationController.imageName = imageNames[indexPath.row]
