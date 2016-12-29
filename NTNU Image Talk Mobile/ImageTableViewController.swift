@@ -13,8 +13,6 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
     
     }
-    //var imageNames = ["Cafe Deadend","Homei","xox","oxo"]
-    //var searchController:UISearchController!
     var myimages:[MyImage] = [
         MyImage(description:"Cafe Deadend", image:"Hamburger"),
         MyImage(description:"Homei", image:"Hamburger2"),
@@ -22,26 +20,12 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     ]
     var filteredmyimages = [MyImage]()
     var shouldShowSearchResults = false
-    
-    
     var searchController: UISearchController!
-    //var resultSearchController = UISearchController()
-    //var mysearchBar = UISearchBar()
     
-    func configureSearchController() {
-         // Initialize and perform a minimum configuration to the search controller.
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = true //become darker when searching
-        searchController.searchBar.placeholder = "Search here..."
-        searchController.searchBar.delegate = self
-        searchController.searchBar.sizeToFit()
-        // Place the search bar view to the tableview headerview.
-        self.tableView.tableHeaderView = searchController.searchBar
-        
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -52,92 +36,64 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         // clean NavigationBar tint
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
         configureSearchController()
-        
-        
-        /*
-        self.resultSearchController = UISearchController(searchResultsController: nil)
-        self.resultSearchController.searchResultsUpdater = self
-        
-        self.resultSearchController.dimsBackgroundDuringPresentation = false
-        self.resultSearchController.searchBar.sizeToFit()
-        self.resultSearchController.searchResultsUpdater = self
+    }
+    
+    
+    
+    func configureSearchController() {
+        print("configureSearchController")
+        // Initialize and perform a minimum configuration to the search controller.
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false //become darker when searching
+        searchController.searchBar.placeholder = "Search here..."
+        searchController.searchBar.delegate = self
         self.definesPresentationContext = true
-        self.tableView.tableHeaderView = self.resultSearchController.searchBar
- 
-        self.tableView.reloadData()
-        */
-        //searchController = UISearchController(searchResultsController: nil)
-        //tableView.tableHeaderView = searchController.searchBar
-        //self.searchController.delegate = self;
-        
-        
-        //navigationItem.titleView = searchBar
-        //self.resultSearchController.searchBar = searchBar()
-        //resultSearchController.searchBar = self
-        //var searchBar = self.resultSearchController.searchBar
-        //mysearchBar.delegate = self
+        searchController.searchBar.sizeToFit()
+        // Place the search bar view to the tableview headerview.
+        self.tableView.tableHeaderView = searchController.searchBar
     }
-    
-    
-    /*
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("xxx")
-    }
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        print("Press Search Button")
-    }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
-        print("Press")
-    }*/
-    
-    
-    
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        shouldShowSearchResults = true
+        print("Begin Editing")
+        shouldShowSearchResults = false
         self.tableView.reloadData()
     }
     
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        print("Cancel!")
         shouldShowSearchResults = false
         self.tableView.reloadData()
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if !shouldShowSearchResults {
-            shouldShowSearchResults = true
-            self.tableView.reloadData()
-        }
-        searchController.searchBar.resignFirstResponder() // close keyboard
+        print("Search is Pressed")
+        shouldShowSearchResults = true
+        self.tableView.reloadData()
+        //searchController.searchBar.resignFirstResponder() // close keyboard
     }
     
     
-    
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
     
     override func viewWillAppear(_ animated: Bool){
+        print("viewWillAppear")
         super.viewWillAppear(animated)
         navigationController?.hidesBarsOnTap = false
     }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        print("numberOfSections")
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("numberOfRowsInSection")
         // #warning Incomplete implementation, return the number of rows
         if(shouldShowSearchResults){
             return filteredmyimages.count
@@ -145,25 +101,15 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         else {
             return myimages.count
         }
-        
-        
-        
-        /*
-        if(self.resultSearchController.isActive){
-            //return self.filteredImageNames.count
-            return myimages.count
-        }else{
-            return myimages.count
-        }*/
     }
 
     
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("cellForRowAt")
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! ImageTableViewCell
-        
         // Configure the cell...
         cell.thumbnailImageView.contentMode = UIViewContentMode.scaleAspectFill
         if(shouldShowSearchResults){
@@ -174,40 +120,10 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
             cell.imageDescription.text = myimages[indexPath.row].description
             cell.thumbnailImageView.image = UIImage(named:myimages[indexPath.row].image)
         }
-        
-        /*
-        if(self.resultSearchController.isActive){
-            cell.imageDescription.text = myimages[indexPath.row].description
-            cell.thumbnailImageView.image = UIImage(named: myimages[indexPath.row].image)
-            //cell.imageDescription.text = self.filteredImageNames[indexPath.row]
-            //cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
-        }else{
-            cell.imageDescription.text = myimages[indexPath.row].description
-            cell.thumbnailImageView.image = UIImage(named: myimages[indexPath.row].image)
-            //cell.imageDescription.text = imageNames[indexPath.row]
-            //cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
-        }*/
         return cell
     }
+
     
-    
-    
-    
-    /*func updateSearchResultsForSearchController(searchController: UISearchController) {
-        guard let searchString = searchController.searchBar.text else {
-            return
-        }
-        
-        // Filter the data array and get only those countries that match the search text.
-        filteredmyimages = myimages.filter({ (country) -> Bool in
-            let countryText:NSString = country
-            
-            return (countryText.rangeOfString(searchString, options: NSStringCompareOptions.CaseInsensitiveSearch).location) != NSNotFound
-        })
-        
-        // Reload the tableview.
-        self.tableView.reloadData()
-    }*/
     
     
     func filterContentForSearchText(searchText: String){
@@ -217,19 +133,11 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         })
     }
     func updateSearchResults(for searchController: UISearchController) {
+        print("updateSearchResults")
         if let searchText = searchController.searchBar.text{
             filterContentForSearchText(searchText: searchText)
             tableView.reloadData()
         }
-        /*
-        self.filteredmyimages.removeAll(keepingCapacity: false)
-        let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
-        //let array = (self.imageNames as NSArray).filterArrayUsingPredicate(searchPredicate)
-        let array = myimages.filter{ searchPredicate.evaluate(with: $0) }
-        //let array = imageNames.filter { searchPredicate.evaluate(with: $0) }
-        self.filteredmyimages = array
-        self.tableView.reloadData()
-        */
     }
  
  
@@ -273,7 +181,7 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
+        print("swipe button")
         let share = UITableViewRowAction(style: .default, title: "Share") {
             (action, indexPath) in
             // share item at indexPath
@@ -283,34 +191,32 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
                 self.present(activityController, animated: true, completion: nil)
             }
         }
-        
         share.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue:253.0/255.0, alpha:1.0)
-        
         return [share]
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepareforsegue")
         if segue.identifier == "showImageDetail"{
             if let indexPath = tableView.indexPathForSelectedRow{
                 let destinationController = segue.destination as! imageDetailViewController
                 if(shouldShowSearchResults){
-                    //destinationController.imageName = filteredImageNames[indexPath.row]
                     destinationController.imageImage = filteredmyimages[indexPath.row].image
                     destinationController.imageName = filteredmyimages[indexPath.row].description
                 }else{
-                    //destinationController.imageImage = "Hamburger"
-                    //destinationController.imageName = imageNames[indexPath.row]
                     destinationController.imageImage = myimages[indexPath.row].image
                     destinationController.imageName = myimages[indexPath.row].description
                 }
-                
-                
             }
         }
     }
     
-    
+    override func didReceiveMemoryWarning() {
+        print("didReceiveMemoryWarning")
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
 
     /*
@@ -339,9 +245,3 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     */
 
 }
-/*
-extension ImageTableViewController: UISearchBarDelegate{
-    func searchBar(searchBar: UISearchBar,searchBarSearchButtonClicked selectedScope: Int){
-        print("hello")
-    }
-}*/
