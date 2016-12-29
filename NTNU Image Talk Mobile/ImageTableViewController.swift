@@ -13,9 +13,18 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
     
     }
-    var imageNames = ["Cafe Deadend","Homei","xox","oxo"]
+    //var imageNames = ["Cafe Deadend","Homei","xox","oxo"]
     //var searchController:UISearchController!
-    var filteredImageNames = [String]()
+    var myimages:[MyImage] = [
+        MyImage(description:"Cafe Deadend", image:"Hamburger"),
+        MyImage(description:"Homei", image:"Hamburger2"),
+        MyImage(description:"Traif", image:"Hamburger3")
+    ]
+    var filteredmyimages = [MyImage]()
+    var shouldShowSearchResults = false
+    
+    
+    
     var resultSearchController = UISearchController()
     //var mysearchBar = UISearchBar()
     
@@ -87,11 +96,22 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if(self.resultSearchController.isActive){
-            return self.filteredImageNames.count
-        }else{
-            return imageNames.count
+        if(shouldShowSearchResults){
+            return filteredmyimages.count
         }
+        else {
+            return myimages.count
+        }
+        
+        
+        
+        /*
+        if(self.resultSearchController.isActive){
+            //return self.filteredImageNames.count
+            return myimages.count
+        }else{
+            return myimages.count
+        }*/
     }
 
     
@@ -103,26 +123,44 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         
         // Configure the cell...
         cell.thumbnailImageView.contentMode = UIViewContentMode.scaleAspectFill
-        if(self.resultSearchController.isActive){
-            cell.imageDescription.text = self.filteredImageNames[indexPath.row]
-            cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
-        }else{
-            cell.imageDescription.text = imageNames[indexPath.row]
-            cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
+        if(shouldShowSearchResults){
+            cell.imageDescription.text = filteredmyimages[indexPath.row].description
+            cell.thumbnailImageView.image = UIImage(named:filteredmyimages[indexPath.row].image)
         }
+        else {
+            cell.imageDescription.text = myimages[indexPath.row].description
+            cell.thumbnailImageView.image = UIImage(named:myimages[indexPath.row].image)
+        }
+        
+        /*
+        if(self.resultSearchController.isActive){
+            cell.imageDescription.text = myimages[indexPath.row].description
+            cell.thumbnailImageView.image = UIImage(named: myimages[indexPath.row].image)
+            //cell.imageDescription.text = self.filteredImageNames[indexPath.row]
+            //cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
+        }else{
+            cell.imageDescription.text = myimages[indexPath.row].description
+            cell.thumbnailImageView.image = UIImage(named: myimages[indexPath.row].image)
+            //cell.imageDescription.text = imageNames[indexPath.row]
+            //cell.thumbnailImageView.image = UIImage(named: "Hamburger.jpg")
+        }*/
         return cell
     }
     
     
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.filteredImageNames.removeAll(keepingCapacity: false)
+        self.filteredmyimages.removeAll(keepingCapacity: false)
         let searchPredicate = NSPredicate(format: "SELF CONTAINS[c] %@", searchController.searchBar.text!)
         //let array = (self.imageNames as NSArray).filterArrayUsingPredicate(searchPredicate)
-        let array = imageNames.filter { searchPredicate.evaluate(with: $0) }
-        self.filteredImageNames = array 
+        let array = myimages.filter{ searchPredicate.evaluate(with: $0) }
+        //let array = imageNames.filter { searchPredicate.evaluate(with: $0) }
+        self.filteredmyimages = array
         self.tableView.reloadData()
     }
+ 
+ 
+ 
     /*
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // build Action List
@@ -184,11 +222,14 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
             if let indexPath = tableView.indexPathForSelectedRow{
                 let destinationController = segue.destination as! imageDetailViewController
                 if(self.resultSearchController.isActive){
-                    destinationController.imageName = filteredImageNames[indexPath.row]
+                    //destinationController.imageName = filteredImageNames[indexPath.row]
+                    destinationController.imageImage = myimages[indexPath.row].image
+                    destinationController.imageName = myimages[indexPath.row].description
                 }else{
-                    destinationController.imageImage = "Hamburger"
-                    destinationController.imageName = imageNames[indexPath.row]
-                    
+                    //destinationController.imageImage = "Hamburger"
+                    //destinationController.imageName = imageNames[indexPath.row]
+                    destinationController.imageImage = myimages[indexPath.row].image
+                    destinationController.imageName = myimages[indexPath.row].description
                 }
                 
                 
