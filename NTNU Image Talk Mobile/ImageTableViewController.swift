@@ -20,27 +20,52 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         MyImage(description:"Traif", image:"Hamburger3")
     ]*/
     
-    
     var filteredmyimages = [MyImage]()
-    var shouldShowSearchResults = false
     var shouldUpdateSearchResults = false
     var searchController: UISearchController!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("viewDidLoad")
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
         // clean NavigationBar tint
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
         configureSearchController()
+        
+        
+        
+        
+        
+        /*
+        let url = NSURL(string: "http://api.fixer.io/latest?base=EUR")
+        let task = URLSession.shared.dataTask(with: url! as URL) { (data,response,error) in
+            if error != nil{
+                print("ERROR")
+            }else{
+                if let content = data{
+                    do{
+                        // Array
+                        let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                        //print(myJson)
+                        if let rates = myJson["rates"] as? NSDictionary{
+                            print(rates)
+                        }
+                    }catch{
+                        
+                    }
+                }
+            }
+            
+        }
+        task.resume()
+        */
+        
+        
+        
     }
+    
+    
+
+    
     
     
     
@@ -53,7 +78,6 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         searchController.searchBar.placeholder = "Search here..."
         searchController.searchBar.delegate = self
         self.definesPresentationContext = true
-        
         searchController.searchBar.sizeToFit()
         // Place the search bar view to the tableview headerview.
         self.tableView.tableHeaderView = searchController.searchBar
@@ -66,8 +90,6 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         }
         print("Begin Editing")
         shouldUpdateSearchResults = false
-        //shouldShowSearchResults = false
-        //self.tableView.reloadData()
     }
     
     
@@ -79,8 +101,6 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         }*/
         print("Cancel!")
         shouldUpdateSearchResults = false
-        //shouldShowSearchResults = false
-        tableView.reloadData()
     }
     
     
@@ -91,20 +111,10 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
             let tmpobj = MyImage(description:item,image:"Hamburger")
             filteredmyimages.append(tmpobj)
         }*/
-        
-        shouldUpdateSearchResults = true;
-        
-        
-        
         print("Search is Pressed")
-        shouldShowSearchResults = true
+        shouldUpdateSearchResults = true;
         updateSearchResults(for: searchController)
-        
         searchController.searchBar.resignFirstResponder() // close keyboard
-        
-        
-        
-        
     }
     
     
@@ -128,15 +138,6 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         //print("numberOfRowsInSection")
         // #warning Incomplete implementation, return the number of rows
         return filteredmyimages.count
-        /*
-        if(shouldShowSearchResults){
-            //print("count"+String(filteredmyimages.count))
-            return filteredmyimages.count
-        }
-        else {
-            //print("count"+String(myimages.count))
-            return myimages.count
-        }*/
     }
 
     
@@ -150,15 +151,6 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         cell.thumbnailImageView.contentMode = UIViewContentMode.scaleAspectFill
         cell.imageDescription.text = filteredmyimages[indexPath.row].description
         cell.thumbnailImageView.image = UIImage(named:filteredmyimages[indexPath.row].image)
-        /*
-        if(shouldShowSearchResults){
-            cell.imageDescription.text = filteredmyimages[indexPath.row].description
-            cell.thumbnailImageView.image = UIImage(named:filteredmyimages[indexPath.row].image)
-        }
-        else {
-            cell.imageDescription.text = myimages[indexPath.row].description
-            cell.thumbnailImageView.image = UIImage(named:myimages[indexPath.row].image)
-        }*/
         return cell
     }
 
@@ -173,29 +165,80 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     }
     */
     func updateSearchResults(for searchController: UISearchController) {
-        print("update")
-        /*
-        var tmp = ["a1","b2","c3","d4"]
-        for item in tmp{
-            var tmpobj = MyImage(description:item,image:"Hamburger")
-            filteredmyimages.append(tmpobj)
-        }*/
-        
-        
-        
         /*
         print("updateSearchResults: "+searchController.searchBar.text!)
         if let searchText = searchController.searchBar.text{
             filterContentForSearchText(searchText: searchText)
             tableView.reloadData()
         }*/
+        print("update")
         if(shouldUpdateSearchResults == true){
             print("Updating")
+            /*
             for random in 1...30 {
                 //let random = arc4random_uniform(20) + 10; // range between 10 and 30
                 let tmpobj = MyImage(description: String(random), image: "Hamburger")
                 filteredmyimages.append(tmpobj)
+            }*/
+            
+            /*
+            let url = NSURL(string: "http://api.fixer.io/latest?base=EUR")
+            let task = URLSession.shared.dataTask(with: url! as URL) { (data,response,error) in
+                if error != nil{
+                    print("ERROR")
+                }else{
+                    if let content = data{
+                        do{
+                            // Array
+                            let myJson = try JSONSerialization.jsonObject(with: content, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
+                            //print(myJson)
+                            if let rates = myJson["rates"] as? NSDictionary{
+                                for (country, rate) in rates{
+                                    let tmpobj = MyImage(description: country as! String, image: "Hamburger")
+                                    self.filteredmyimages.append(tmpobj)
+                                    //print(country)
+                                }
+                                
+                            }
+                        }catch{
+                            
+                        }
+                    }
+                }
+                
             }
+            task.resume()*/
+            
+            // synchrnous
+            do{
+                let url = URL(string: "http://api.fixer.io/latest?base=EUR")
+                let html = try String(contentsOf: url!)
+                if let data = html.data(using: String.Encoding.utf8) {
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
+                        //print(json!)
+                        if let rates = json?["rates"] as? NSDictionary{
+                            //print(rates[searchController.searchBar.text])
+                            //let tmpobj = MyImage(description: "\(rates[searchController.searchBar.text!])", image: "Hamburger")
+                            //self.filteredmyimages.append(tmpobj)
+                            
+                            for (country, rate) in rates{
+                                if(country as? String == searchController.searchBar.text){
+                                    let tmpobj = MyImage(description: country as! String, image: "Hamburger")
+                                    self.filteredmyimages.append(tmpobj)
+                                }
+                                //print(country)
+                            }
+                        }
+                    } catch {
+                        print("Something went wrong")
+                    }
+                }
+            }catch{
+                print("error")
+            }
+            
+            
         }
         tableView.reloadData()
     }
@@ -263,16 +306,10 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
                 let destinationController = segue.destination as! imageDetailViewController
                 destinationController.imageImage = filteredmyimages[indexPath.row].image
                 destinationController.imageName = filteredmyimages[indexPath.row].description
-                /*
-                if(shouldShowSearchResults){
-                    destinationController.imageImage = filteredmyimages[indexPath.row].image
-                    destinationController.imageName = filteredmyimages[indexPath.row].description
-                }else{
-                    destinationController.imageImage = myimages[indexPath.row].image
-                    destinationController.imageName = myimages[indexPath.row].description
-                }*/
+                destinationController.hidesBottomBarWhenPushed = true
             }
         }
+        
     }
     
     override func didReceiveMemoryWarning() {

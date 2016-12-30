@@ -6,8 +6,9 @@
 //  Copyright © 2016 WAN SHR-TZE. All rights reserved.
 //
 // OOP practice
-
+import CoreData
 import Foundation
+
 class MyImage{
     var description = ""
     var image = ""
@@ -17,3 +18,9 @@ class MyImage{
         self.image = image
     }
 }
+/*
+class MyImage:NSManagedObject{
+    @NSManaged var name:String
+    
+}
+*/

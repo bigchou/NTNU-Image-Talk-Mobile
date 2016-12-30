@@ -19,6 +19,7 @@
 		BF1BBB6F1E0E9E8A00444D62 /* imageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB6E1E0E9E8A00444D62 /* imageDetailViewController.swift */; };
 		BF1BBB711E0EA19600444D62 /* MyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB701E0EA19600444D62 /* MyImage.swift */; };
 		BF1BBB731E0FBC1900444D62 /* addImageControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB721E0FBC1800444D62 /* addImageControllerTableViewController.swift */; };
+		BF1CBFEB1E16059A00C42643 /* MyAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1CBFEA1E16059A00C42643 /* MyAlbumViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BF1BBB6E1E0E9E8A00444D62 /* imageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imageDetailViewController.swift; sourceTree = "<group>"; };
 		BF1BBB701E0EA19600444D62 /* MyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImage.swift; sourceTree = "<group>"; };
 		BF1BBB721E0FBC1800444D62 /* addImageControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addImageControllerTableViewController.swift; sourceTree = "<group>"; };
+		BF1CBFEA1E16059A00C42643 /* MyAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAlbumViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				BF1BBB6E1E0E9E8A00444D62 /* imageDetailViewController.swift */,
 				BF1BBB701E0EA19600444D62 /* MyImage.swift */,
 				BF1BBB721E0FBC1800444D62 /* addImageControllerTableViewController.swift */,
+				BF1CBFEA1E16059A00C42643 /* MyAlbumViewController.swift */,
 			);
 			path = "NTNU Image Talk Mobile";
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				BF1BBB731E0FBC1900444D62 /* addImageControllerTableViewController.swift in Sources */,
 				BF1BBB711E0EA19600444D62 /* MyImage.swift in Sources */,
 				BF1BBB6D1E0E6C2200444D62 /* ImageTableViewCell.swift in Sources */,
+				BF1CBFEB1E16059A00C42643 /* MyAlbumViewController.swift in Sources */,
 				BF1BBB6F1E0E9E8A00444D62 /* imageDetailViewController.swift in Sources */,
 				BF1BBB6B1E0E509800444D62 /* ImageTableViewController.swift in Sources */,
 				BF1BBB421E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld in Sources */,
