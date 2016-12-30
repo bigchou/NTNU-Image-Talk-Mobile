@@ -11,7 +11,7 @@ import UIKit
 class imageDetailViewController: UIViewController {
     @IBOutlet weak var DescriptionArea: UILabel!
     @IBOutlet weak var imageImageView: UIImageView!
-    var imageImage = ""
+    var imageImage:NSData?
     var imageName = ""
 
     override func viewDidLoad() {
@@ -29,7 +29,8 @@ class imageDetailViewController: UIViewController {
         
         
         
-        imageImageView.image = UIImage(named: imageImage)
+        //imageImageView.image = UIImage(named: imageImage)
+        imageImageView.image = UIImage(data: imageImage! as Data)
         
         let topColor = UIColor(red:15.0/255.0,green:118.0/255.0,blue:128.0/255.0,alpha:1.0)
         let bottomColor = UIColor(red:84.0/255.0,green:187.0/255.0,blue:187.0/255.0,alpha:1.0)
@@ -55,8 +56,8 @@ class imageDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.hidesBarsOnTap = true
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        //navigationController?.hidesBarsOnTap = true
+        //navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

@@ -7,10 +7,33 @@
 //
 
 import UIKit
+import CoreData
 
 class addImageControllerTableViewController: UITableViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBOutlet weak var UploadBtnText: UIButton!
+    @IBAction func UploadBtn(_ sender: UIButton) {
+        // store data to DB
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let newRecord = NSEntityDescription.insertNewObject(forEntityName: "MyDBImages", into: context) as! MyDBImages
+        newRecord.setValue("Peter", forKey: "descript")
+        if let uploadImage = imageView.image{
+            newRecord.image = UIImageJPEGRepresentation(uploadImage,1.0) as NSData?
+        }
+        //let uploadImage = UIImageJPEGRepresentation(imageView.image!, 1.0)
+        do{
+            try context.save()
+            print("saved")
+        }catch{
+            // process error
+            
+        }
+        
+        // change button text
+        sender.setTitle("Done!", for: .normal)
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         imageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         imageView.contentMode = UIViewContentMode.scaleAspectFill
@@ -47,6 +70,8 @@ class addImageControllerTableViewController: UITableViewController,UIImagePicker
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = .photoLibrary // optional: .camera
                 self.present(imagePicker, animated: true, completion: nil)
+                //
+                self.UploadBtnText.setTitle("Upload", for: .normal)
             }
         }
         

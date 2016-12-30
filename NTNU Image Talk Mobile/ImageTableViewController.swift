@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 class ImageTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate{
     @IBAction func unwindToHomeScreen(segue:UIStoryboardSegue){
@@ -27,6 +27,9 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // delete all coredata
+        deleteallrecordbycoredata() // for test use
+        
         // clean NavigationBar tint
         navigationItem.backBarButtonItem = UIBarButtonItem(title:"",style:.plain,target:nil,action:nil)
         configureSearchController()
@@ -66,7 +69,20 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     
 
     
-    
+    func deleteallrecordbycoredata(){
+        // Initialize Fetch Request
+        let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MyDBImages")
+        // Configure Fetch Request
+        fetchRequest.includesPropertyValues = false
+        if let result = try? context.fetch(fetchRequest) {
+            for object in result {
+                context.delete(object as! NSManagedObject)
+                print("del")
+            }
+        }
+    }
     
     
     func configureSearchController() {
@@ -150,7 +166,8 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         // Configure the cell...
         cell.thumbnailImageView.contentMode = UIViewContentMode.scaleAspectFill
         cell.imageDescription.text = filteredmyimages[indexPath.row].description
-        cell.thumbnailImageView.image = UIImage(named:filteredmyimages[indexPath.row].image)
+        //cell.thumbnailImageView.image = UIImage(named:filteredmyimages[indexPath.row].image)
+        cell.thumbnailImageView.image = UIImage(data: filteredmyimages[indexPath.row].image! as Data)
         return cell
     }
 
@@ -224,7 +241,10 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
                             
                             for (country, rate) in rates{
                                 if(country as? String == searchController.searchBar.text){
-                                    let tmpobj = MyImage(description: country as! String, image: "Hamburger")
+                                    //var tmpimg = UIImage(named: "Hamburger")
+                                    let tmpimg = UIImage(named: "Hamburger")
+                                    let data = UIImageJPEGRepresentation(tmpimg!,1.0) as NSData?
+                                    let tmpobj = MyImage(description: country as! String, image: data! as NSData)
                                     self.filteredmyimages.append(tmpobj)
                                 }
                                 //print(country)
@@ -288,6 +308,21 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         let share = UITableViewRowAction(style: .default, title: "Share") {
             (action, indexPath) in
             // share item at indexPath
+            let defaultText = "Just checking in at " + self.filteredmyimages[indexPath.row].description
+            if let imageToShare = UIImage(data: self.filteredmyimages[indexPath.row].image as! Data){
+                let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
+                self.present(activityController, animated: true, completion: nil)
+            }
+        }
+        share.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue:253.0/255.0, alpha:1.0)
+        return [share]
+    }
+    /*
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        //print("swipe button")
+        let share = UITableViewRowAction(style: .default, title: "Share") {
+            (action, indexPath) in
+            // share item at indexPath
             let defaultText = "Just checking in at "
             if let imageToShare = UIImage(named: "Hamburger"){
                 let activityController = UIActivityViewController(activityItems: [defaultText, imageToShare], applicationActivities: nil)
@@ -296,7 +331,7 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         }
         share.backgroundColor = UIColor(red: 28.0/255.0, green: 165.0/255.0, blue:253.0/255.0, alpha:1.0)
         return [share]
-    }
+    }*/
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -304,7 +339,8 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         if segue.identifier == "showImageDetail"{
             if let indexPath = tableView.indexPathForSelectedRow{
                 let destinationController = segue.destination as! imageDetailViewController
-                destinationController.imageImage = filteredmyimages[indexPath.row].image
+                //destinationController.imageImage = filteredmyimages[indexPath.row].image
+                destinationController.imageImage = filteredmyimages[indexPath.row].image!
                 destinationController.imageName = filteredmyimages[indexPath.row].description
                 destinationController.hidesBottomBarWhenPushed = true
             }

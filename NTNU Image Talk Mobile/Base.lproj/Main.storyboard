@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="j1C-os-5xd" id="0ib-7v-ecl">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="b3n-ML-5pX">
@@ -92,12 +92,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hamburger" translatesAutoresizingMaskIntoConstraints="NO" id="qxr-fh-lsJ">
-                                <rect key="frame" x="30" y="95" width="315" height="395"/>
+                                <rect key="frame" x="30" y="95" width="315" height="346"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0084011130136986308" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="1" green="0.5" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlh-De-N5k">
-                                <rect key="frame" x="30" y="492" width="315" height="120"/>
+                                <rect key="frame" x="30" y="443" width="315" height="120"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="guc-iw-Yl5"/>
@@ -138,22 +138,22 @@
                         <sections>
                             <tableViewSection id="klx-j7-xqP">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="440" id="rKi-JY-f4x">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="440"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="462" id="rKi-JY-f4x">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="462"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rKi-JY-f4x" id="slz-gL-wGl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="439"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="462"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="Pyt-ZP-Ef7">
-                                                    <rect key="frame" x="152" y="186" width="71" height="68"/>
+                                                    <rect key="frame" x="152" y="197" width="71" height="68"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="68" id="8WP-3x-SaL"/>
                                                         <constraint firstAttribute="width" constant="71" id="H5S-mY-rsG"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5rM-AZ-pVX">
-                                                    <rect key="frame" x="-5" y="0.0" width="380" height="439.5"/>
+                                                    <rect key="frame" x="-5" y="0.0" width="380" height="462"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -168,10 +168,10 @@
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="UVr-89-suM">
-                                        <rect key="frame" x="0.0" y="440" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="462" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UVr-89-suM" id="X3l-rj-29m">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8y6-7Y-adg">
@@ -180,6 +180,9 @@
                                                     <state key="normal" title="Upload">
                                                         <color key="titleColor" red="0.99019607843137258" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="UploadBtn:" destination="S2b-e2-Z9V" eventType="touchUpInside" id="XhS-1G-8Yt"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -206,6 +209,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="UploadBtnText" destination="8y6-7Y-adg" id="duy-y9-YgD"/>
                         <outlet property="imageView" destination="5rM-AZ-pVX" id="o8w-bS-KZ9"/>
                     </connections>
                 </tableViewController>
@@ -315,6 +319,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YDJ-zU-47V" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="4l2-nQ-h7i">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
