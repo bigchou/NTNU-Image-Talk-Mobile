@@ -228,13 +228,36 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
             
             // synchrnous
             do{
-                let url = URL(string: "http://api.fixer.io/latest?base=EUR")
+                //http://api.fixer.io/latest?base=EUR
+                //http://140.122.185.35:8000/api/images/?format=json
+                let input : String = (searchController.searchBar.text!).lowercased()
+                let urlwithPercentEscapes = input.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+                let qry : String = "http://140.122.185.35:8000/api/images/"+urlwithPercentEscapes!+"/"
+                print(qry)
+                let url = URL(string: qry)
                 let html = try String(contentsOf: url!)
                 if let data = html.data(using: String.Encoding.utf8) {
                     do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
+                        /*
+                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]*/
                         //print(json!)
-                        if let rates = json?["rates"] as? NSDictionary{
+                        let myJson = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        if let items = myJson as? NSArray{
+                            for item in items{
+                                if let ditem = item as? NSDictionary{
+                                    let text = ditem["text"] as! String
+                                    print(text)
+                                    //let tmpimg = UIImage(named: "Hamburger")
+                                    let url = URL(string: ditem["img"] as! String)
+                                    let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                                    
+                                    //let data = UIImageJPEGRepresentation(tmpimg!,1.0) as NSData?
+                                    let tmpobj = MyImage(description: text, image: data! as NSData)
+                                    self.filteredmyimages.append(tmpobj)
+                                }
+                            }
+                        }
+                        /*if let rates = json?["rates"] as? NSDictionary{
                             //print(rates[searchController.searchBar.text])
                             //let tmpobj = MyImage(description: "\(rates[searchController.searchBar.text!])", image: "Hamburger")
                             //self.filteredmyimages.append(tmpobj)
@@ -249,7 +272,8 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
                                 }
                                 //print(country)
                             }
-                        }
+                        }*/
+                        
                     } catch {
                         print("Something went wrong")
                     }

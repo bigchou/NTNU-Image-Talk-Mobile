@@ -18,7 +18,7 @@ class addImageControllerTableViewController: UITableViewController,UIImagePicker
         let appDelegate = (UIApplication.shared.delegate) as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         let newRecord = NSEntityDescription.insertNewObject(forEntityName: "MyDBImages", into: context) as! MyDBImages
-        newRecord.setValue("Peter", forKey: "descript")
+        newRecord.setValue("A boat floating on the surface of water", forKey: "descript")
         if let uploadImage = imageView.image{
             newRecord.image = UIImageJPEGRepresentation(uploadImage,1.0) as NSData?
         }
