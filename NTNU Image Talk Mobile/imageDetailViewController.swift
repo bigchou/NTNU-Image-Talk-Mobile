@@ -11,9 +11,26 @@ import UIKit
 class imageDetailViewController: UIViewController {
     @IBOutlet weak var DescriptionArea: UILabel!
     @IBOutlet weak var imageImageView: UIImageView!
+    
     var imageImage:NSData?
     var imageName = ""
+    var relevant_1sttext:String = ""
+    var relevant_2ndtext:String = ""
+    @IBAction func firstrelevantimage(_ sender: Any) {
+        let alert = UIAlertController(title: "Description", message: relevant_1sttext, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    @IBAction func secondrelevantimage(_ sender: Any) {
+        let alert = UIAlertController(title: "Description", message: relevant_2ndtext, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 
+    @IBOutlet weak var relevant_1stpic: UIImageView!
+    @IBOutlet weak var relevant_2ndpic: UIImageView!
+    @IBOutlet weak var relevant_1stimg: UIButton!
+    @IBOutlet weak var relevant_2ndimg: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,14 +63,82 @@ class imageDetailViewController: UIViewController {
         
         
         DescriptionArea.text = imageName
+        // fit top-left
+        //DescriptionArea.numberOfLines = 0
+        //DescriptionArea.sizeToFit()
         
-    }
+        // synchrnous transmission
+        
+        var relevantimg =  [String]()
+        var relevanturl = [String]()
+        do{
+            let input : String = (imageName).lowercased()
+            let urlwithPercentEscapes = input.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+            let qry : String = "http://140.122.185.35:8000/api/images/"+urlwithPercentEscapes!+"/"
+            print(qry)
+            let url = URL(string: qry)
+            let html = try String(contentsOf: url!)
+            if let data = html.data(using: String.Encoding.utf8) {
+                do {
+                    let myJson = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                    if let items = myJson as? NSArray{
+                        for item in items{
+                            if let ditem = item as? NSDictionary{
+                                let text = ditem["text"] as! String
+                                relevantimg.append(text)
+                                let url = ditem["img"] as! String
+                                relevanturl.append(url)
+                                //let url = URL(string: ditem["img"] as! String)
+                                //let data = try? Data(contentsOf: url!)
+                                //let tmpobj = MyImage(description: text, image: data! as NSData)
+                                //relevantimg.append(tmpobj)
+                            }
+                        }
+                    }
+                } catch {
+                    print("Something went wrong")
+                }
+            }
+        }catch{
+            print("error")
+        }
+        
+        
+        // list all relevances
+        relevant_1sttext = relevantimg[1]
+        relevant_2ndtext = relevantimg[2]
+        // set button title
+        let maxlen = 38
+        var str:String = relevantimg[1]
+        var btntitle:String = str
+        if(str.characters.count >= maxlen){
+            btntitle = str.substring(to: str.index(str.startIndex, offsetBy: maxlen))+"..."
+        }
+        relevant_1stimg.setTitle(btntitle, for: .normal)
+        str = relevantimg[2]
+        btntitle = str
+        if(str.characters.count >= maxlen){
+            btntitle = str.substring(to: str.index(str.startIndex, offsetBy: maxlen))+"..."
+        }
+        relevant_2ndimg.setTitle(btntitle, for: .normal)
+        
+        // set thumnail picture
+        var url = URL(string: relevanturl[1])
+        var data = try? Data(contentsOf: url!)
+        relevant_1stpic.image = UIImage(data: data!)
+        url = URL(string: relevanturl[2])
+        data = try? Data(contentsOf: url!)
+        relevant_2ndpic.image = UIImage(data: data!)
+        
+        
     
+    }
+
     override func viewWillLayoutSubviews() {
         DescriptionArea.sizeToFit()
     }
-    
-    
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //navigationController?.hidesBarsOnTap = true

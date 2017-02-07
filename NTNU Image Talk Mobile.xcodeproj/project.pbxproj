@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0CBF5CC81469625C5A6EAF2 /* Pods_NTNU_Image_Talk_Mobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DC0B869EE320C72E340C57F /* Pods_NTNU_Image_Talk_Mobile.framework */; };
 		BF1BBB3A1E0E438700444D62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB391E0E438700444D62 /* AppDelegate.swift */; };
 		BF1BBB3F1E0E438700444D62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF1BBB3D1E0E438700444D62 /* Main.storyboard */; };
 		BF1BBB421E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF1BBB401E0E438700444D62 /* NTNU_Image_Talk_Mobile.xcdatamodeld */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4DC0B869EE320C72E340C57F /* Pods_NTNU_Image_Talk_Mobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NTNU_Image_Talk_Mobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66AAFFEF892DC8142F35B672 /* Pods-NTNU Image Talk Mobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTNU Image Talk Mobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-NTNU Image Talk Mobile/Pods-NTNU Image Talk Mobile.release.xcconfig"; sourceTree = "<group>"; };
 		BF1BBB361E0E438700444D62 /* NTNU Image Talk Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NTNU Image Talk Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF1BBB391E0E438700444D62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF1BBB3E1E0E438700444D62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +62,9 @@
 		BF1BBB701E0EA19600444D62 /* MyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyImage.swift; sourceTree = "<group>"; };
 		BF1BBB721E0FBC1800444D62 /* addImageControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addImageControllerTableViewController.swift; sourceTree = "<group>"; };
 		BF1CBFEA1E16059A00C42643 /* MyAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAlbumViewController.swift; sourceTree = "<group>"; };
+		C3DEA692E5A035473ED0BB3D /* Pods_NTNU_Image_Talk_Mobile_NTNU_Image_Talk_MobileTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NTNU_Image_Talk_Mobile_NTNU_Image_Talk_MobileTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDA458169B72388E4346A23F /* Pods-NTNU Image Talk Mobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NTNU Image Talk Mobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NTNU Image Talk Mobile/Pods-NTNU Image Talk Mobile.debug.xcconfig"; sourceTree = "<group>"; };
+		E2B3714DBDCC305F5E9CACF0 /* Pods_NTNU_Image_Talk_Mobile_NTNU_Image_Talk_MobileUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NTNU_Image_Talk_Mobile_NTNU_Image_Talk_MobileUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0CBF5CC81469625C5A6EAF2 /* Pods_NTNU_Image_Talk_Mobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +93,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		131A1CDB0E47A2C8F9962CBB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4DC0B869EE320C72E340C57F /* Pods_NTNU_Image_Talk_Mobile.framework */,
+				C3DEA692E5A035473ED0BB3D /* Pods_NTNU_Image_Talk_Mobile_NTNU_Image_Talk_MobileTests.framework */,
+				E2B3714DBDCC305F5E9CACF0 /* Pods_NTNU_Image_Talk_Mobile_NTNU_Image_Talk_MobileUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2858AA8472213EB86E18DEF9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DDA458169B72388E4346A23F /* Pods-NTNU Image Talk Mobile.debug.xcconfig */,
+				66AAFFEF892DC8142F35B672 /* Pods-NTNU Image Talk Mobile.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BF1BBB2D1E0E438700444D62 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +119,8 @@
 				BF1BBB501E0E438800444D62 /* NTNU Image Talk MobileTests */,
 				BF1BBB5B1E0E438800444D62 /* NTNU Image Talk MobileUITests */,
 				BF1BBB371E0E438700444D62 /* Products */,
+				2858AA8472213EB86E18DEF9 /* Pods */,
+				131A1CDB0E47A2C8F9962CBB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,9 +178,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BF1BBB611E0E438800444D62 /* Build configuration list for PBXNativeTarget "NTNU Image Talk Mobile" */;
 			buildPhases = (
+				3659F48DAA6ED251CEBF4CB7 /* [CP] Check Pods Manifest.lock */,
 				BF1BBB321E0E438700444D62 /* Sources */,
 				BF1BBB331E0E438700444D62 /* Frameworks */,
 				BF1BBB341E0E438700444D62 /* Resources */,
+				2673AEB965693F5488CEC262 /* [CP] Embed Pods Frameworks */,
+				6C2761BA2DB35C70D675B425 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,6 +305,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2673AEB965693F5488CEC262 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NTNU Image Talk Mobile/Pods-NTNU Image Talk Mobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3659F48DAA6ED251CEBF4CB7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		6C2761BA2DB35C70D675B425 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NTNU Image Talk Mobile/Pods-NTNU Image Talk Mobile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BF1BBB321E0E438700444D62 /* Sources */ = {
@@ -437,8 +516,11 @@
 		};
 		BF1BBB621E0E438800444D62 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDA458169B72388E4346A23F /* Pods-NTNU Image Talk Mobile.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8R7R6KLM3D;
 				INFOPLIST_FILE = "NTNU Image Talk Mobile/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -450,8 +532,11 @@
 		};
 		BF1BBB631E0E438800444D62 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66AAFFEF892DC8142F35B672 /* Pods-NTNU Image Talk Mobile.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8R7R6KLM3D;
 				INFOPLIST_FILE = "NTNU Image Talk Mobile/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

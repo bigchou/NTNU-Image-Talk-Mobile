@@ -23,11 +23,12 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     var filteredmyimages = [MyImage]()
     var shouldUpdateSearchResults = false
     var searchController: UISearchController!
-    
+    var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // delete all coredata
+        // ******************** for test use ****************
         deleteallrecordbycoredata() // for test use
         
         // clean NavigationBar tint
@@ -62,6 +63,13 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
         task.resume()
         */
         
+        /*
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = .gray
+        view.addSubview(activityIndicator)
+        self.activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()*/
         
         
     }
@@ -121,6 +129,9 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        
+        
         /*
         let tmp = ["a1","b2","c3","d4"]
         for item in tmp{
@@ -225,9 +236,18 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
                 
             }
             task.resume()*/
+            /*
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = .gray
+            view.addSubview(activityIndicator)
+             self.activityIndicator.startAnimating()
+             UIApplication.shared.beginIgnoringInteractionEvents()*/
+            
             
             // synchrnous
             do{
+                
                 //http://api.fixer.io/latest?base=EUR
                 //http://140.122.185.35:8000/api/images/?format=json
                 let input : String = (searchController.searchBar.text!).lowercased()
@@ -285,6 +305,7 @@ class ImageTableViewController: UITableViewController, UISearchResultsUpdating, 
             
         }
         tableView.reloadData()
+        
     }
  
  
